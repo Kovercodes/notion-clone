@@ -1,7 +1,7 @@
 "use client";
 
 import { useConvexAuth } from "convex/react";
-import { SignIn, SignInButton, UserButton } from "@clerk/clerk-react";
+import { SignIn, SignInButton, UserButton, SignUpButton } from "@clerk/clerk-react";
 import { useScrollTop } from "@/hooks/use-scroll-top";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -42,11 +42,11 @@ export const Navbar = () => {
                                 Log in
                             </Button>
                         </SignInButton>
-                        <SignInButton mode="modal">
+                        <SignUpButton mode="modal">
                             <Button size="sm">
                                 Get jotion for free
                             </Button>
-                        </SignInButton>
+                        </SignUpButton>
                     </>
                 )}
                 <ModeToggle/>
