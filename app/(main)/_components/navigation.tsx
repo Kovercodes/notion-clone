@@ -25,7 +25,7 @@ export const Navigation = () => {
 
         isResizingRef.current = true;
         document.addEventListener("mousemove", handleMouseMove);
-        document.addEventListener("mouseUp", handleMouseUp);
+        document.addEventListener("mouseup", handleMouseUp);
     };
 
     const handleMouseMove = (event: MouseEvent) => {
