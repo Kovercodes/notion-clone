@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { ChevronsLeft, MenuIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { ElementRef, useRef, useState } from "react";
+import { ElementRef, useEffect, useRef, useState } from "react";
 
 import { useMediaQuery } from "usehooks-ts";
 
@@ -16,6 +16,20 @@ export const Navigation = () => {
     const navbarRef = useRef<ElementRef<"div">>(null);
     const [isResetting, setIsResetting] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(isMobile);
+
+    useEffect(() => {
+        if (isMobile) {
+            collapse();
+        } else {
+            resetWidth();
+        }
+    }, [isMobile]);
+
+    useEffect(() => {
+        if (isMobile) {
+            collapse();
+        }
+    }, [pathname, isMobile]);
 
     const handleMouseDown = (
         event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -48,6 +62,54 @@ export const Navigation = () => {
         document.removeEventListener("mouseup", handleMouseUp);
     };
 
+    const resetWidth = () => {
+        if (sidebarRef.current && navbarRef.current) {
+            setIsCollapsed(false);
+            setIsResetting(true);
+            sidebarRef.current.style.width = isMobile ? "100%" : "240px";
+            navbarRef.current.style.setProperty(
+                "width",
+                isMobile ? "0" : "calc(100% - 240px)"
+            );
+            navbarRef.current.style.setProperty(
+                "left",
+                isMobile ? "100%" : "240px"
+            );
+            setTimeout(() => setIsResetting(false), 300);
+        }
+    }
+
+    const opacityAnimation = (isIn: boolean = true): void => {
+        if (isIn) {
+            Array.from(sidebarRef.current.children).forEach(child => {
+                child.style.transition = 'opacity 0.1s';
+                child.style.opacity = '0';
+            });
+        } else {
+            Array.from(sidebarRef.current.children).forEach(child => {
+                child.style.transition = '0';
+                child.style.opacity = '100';
+            });
+        }
+    }
+
+    const collapse = () => {
+        if (sidebarRef.current && navbarRef.current) {
+            setIsCollapsed(true);
+            setIsResetting(true);
+
+            sidebarRef.current.style.width = "0";
+            navbarRef.current.style.setProperty("width", "100%");
+            navbarRef.current.style.setProperty("left", "0");
+
+            // makes all children transparent, only for beautiful animation, so user wont see children resizing along with the container
+            opacityAnimation(true);
+
+            setTimeout(() => setIsResetting(false), 300);
+            setTimeout(() => opacityAnimation(false), 300);
+        }
+    }
+
     return (
         <>
             <aside
@@ -63,6 +125,7 @@ export const Navigation = () => {
                     isMobile && "opacity-100"
                 )}
                     role="button"
+                    onClick={collapse}
                 >
                     <ChevronsLeft className="h-6 w-6"/>
                 </div>
@@ -78,7 +141,7 @@ export const Navigation = () => {
                 </div>
                 <div
                     onMouseDown={handleMouseDown}
-                    onClick={() => {}}
+                    onClick={resetWidth}
                     className="opacity-0 group-hover/sidebar:opacity-100 transtion cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0"
                 />
             </aside>
@@ -91,7 +154,7 @@ export const Navigation = () => {
             )}
             >
                 <nav className="bg-transparent px-3 py-2 w-full">
-                    {isCollapsed && <MenuIcon role="button" className="h-6 w-6 text-muted-foreground"/>}
+                    {isCollapsed && <MenuIcon role="button" onClick={resetWidth} className="h-6 w-6 text-muted-foreground"/>}
                 </nav>
             </div>
         </>
