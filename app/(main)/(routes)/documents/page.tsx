@@ -9,6 +9,7 @@ import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 
 import { toast } from "sonner";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const DocumentsPage = () => {
     const { user } = useUser();
@@ -43,10 +44,13 @@ const DocumentsPage = () => {
             <h2 className="text-large font-medium">
                 {user?.firstName ? `Welcome to ${user?.firstName}'s Jotion!` : `Welcome to ${user?.username}'s Jotion!`}
             </h2>
-            <Button onClick={onCreate}>
-                <FilePlus className="w-4 h-4 mr-2"/>
-                Create a note
-            </Button>
+            <div className="flex items-center gap-x-4">
+                <Button onClick={onCreate}>
+                    <FilePlus className="w-4 h-4 mr-2"/>
+                    Create a note
+                </Button>
+                <ModeToggle/>
+            </div>
         </div>
     );
 }
