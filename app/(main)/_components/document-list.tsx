@@ -58,7 +58,7 @@ export const DocumentList = ({parentDocumentId, level = 0}: DocumentListProps) =
                 className={cn(
                     "hidden text-sm font-medium text-muted-foreground/80",
                     expanded && "last:block",
-                    level === 0 && "hidden"
+                    level === 0 && "!hidden"
                 )}
             >
                 No pages inside

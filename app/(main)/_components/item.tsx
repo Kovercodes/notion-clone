@@ -20,7 +20,7 @@ interface ItemProps {
     level?: number;
     onExpand?: () => void;
     label: string;
-    onClick: () => void;
+    onClick?: () => void;
     icon: LucideIcon;
 }
 
@@ -58,7 +58,7 @@ export const Item = ({
     ) => {
         event.stopPropagation();
         if (!id) return;
-        const promise = create({title: "Untitled", parentDocument: id})
+        const promise = create({title: "untitled", parentDocument: id})
             .then((documentId) => {
                 if (!expanded) {
                     onExpand?.();
