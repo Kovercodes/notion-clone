@@ -224,19 +224,17 @@ export const getSearch = query({
     const documents = await ctx.db
       .query("documents")
       .withIndex("by_user", (q) => q.eq("userId", userId))
-      .filter((q) =>
-        q.eq(q.field("isArchived"), false),
-      )
+      .filter((q) => q.eq(q.field("isArchived"), false))
       .order("desc")
       .collect();
 
-      return documents;
-  }
+    return documents;
+  },
 });
 
 export const getById = query({
-  args: {documentId: v.id("documents")},
-  hadler: async (ctx, args) => {
+  args: { documentId: v.id("documents") },
+  handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
 
     const document = await ctx.db.get(args.documentId);
@@ -260,5 +258,5 @@ export const getById = query({
     }
 
     return document;
-  }
+  },
 });
