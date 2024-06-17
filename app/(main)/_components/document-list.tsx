@@ -31,8 +31,8 @@ export const DocumentList = ({parentDocumentId, level = 0}: DocumentListProps) =
         parentDocument: parentDocumentId
     });
 
-    const onRedirect = (documentId: string) => {
-        router.push(`documents/${documentId}`)
+    const onRedirect = (documentId:string) => {
+        router.push(`/documents/${documentId}`)
     }
 
     if (documents === undefined) {
