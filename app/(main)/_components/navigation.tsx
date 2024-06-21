@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from "@/lib/utils";
-import { ChevronsLeft, MenuIcon, Plus, PlusCircle, Search, Settings2, Trash } from "lucide-react";
+import { MenuIcon, PanelLeftClose, Plus, PlusCircle, Search, Settings2, Trash } from "lucide-react";
 import { useParams, usePathname } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 
@@ -158,7 +158,7 @@ export const Navigation = () => {
                     role="button"
                     onClick={collapse}
                 >
-                    <ChevronsLeft className="h-6 w-6"/>
+                    <PanelLeftClose className="h-6 w-6"/>
                 </div>
                 <div>
                     <UserItem/>
