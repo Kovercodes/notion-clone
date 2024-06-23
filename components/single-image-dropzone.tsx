@@ -6,6 +6,7 @@ import { useDropzone, type DropzoneOptions } from 'react-dropzone';
 import { twMerge } from 'tailwind-merge';
 
 import { Spinner } from './spinner';
+import { toast } from 'sonner';
 
 const variants = {
   base: 'relative rounded-md flex justify-center items-center flex-col cursor-pointer min-h-[150px] min-w-[200px] border border-dashed border-gray-400 dark:border-gray-300 transition-colors duration-200 ease-in-out',
@@ -51,9 +52,11 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
     const imageUrl = React.useMemo(() => {
       if (typeof value === 'string') {
         // in case a url is passed in, use it to display the image
+        toast.success("Uploaded a cover");
         return value;
       } else if (value) {
         // in case a file is passed in, create a base64 url to display the image
+        toast.success("Uploaded a cover");
         return URL.createObjectURL(value);
       }
       return null;
@@ -109,12 +112,16 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
       if (fileRejections[0]) {
         const { errors } = fileRejections[0];
         if (errors[0]?.code === 'file-too-large') {
+          toast.error("Too large");
           return ERROR_MESSAGES.fileTooLarge(dropzoneOptions?.maxSize ?? 0);
         } else if (errors[0]?.code === 'file-invalid-type') {
+          toast.error("Invalid type");
           return ERROR_MESSAGES.fileInvalidType();
         } else if (errors[0]?.code === 'too-many-files') {
+          toast.error("Too many files");
           return ERROR_MESSAGES.tooManyFiles(dropzoneOptions?.maxFiles ?? 0);
         } else {
+          toast.error("Something went wrong");
           return ERROR_MESSAGES.fileNotSupported();
         }
       }
