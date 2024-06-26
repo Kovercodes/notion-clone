@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import { FileIcon } from "lucide-react";
 
 interface DocumentListProps {
-    parentDocumentId?: Id<"Documents">;
+    parentDocumentId?: Id<"documents">;
     level?: number;
     data?: Doc<"documents">[];
 }
