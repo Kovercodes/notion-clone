@@ -12,6 +12,7 @@ import { remove } from "@/convex/documents";
 import { toast } from "sonner";
 import { useEdgeStore } from "@/lib/edgestore";
 import { Skeleton } from "./ui/skeleton";
+import { Id } from "@/convex/_generated/dataModel";
 
 interface CoverImageProps {
     url?: string;
@@ -33,7 +34,7 @@ export const Cover = ({
             });
         }
         removeCoverImage({
-            id: params.documentId
+            id: params.documentId as Id<'documents'>
         });
         toast.success("Removed the cover");
     }
