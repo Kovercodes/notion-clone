@@ -10,13 +10,18 @@ import { api } from "@/convex/_generated/api";
 
 import { toast } from "sonner";
 import { ModeToggle } from "@/components/mode-toggle";
+import { useRouter } from "next/navigation";
 
 const DocumentsPage = () => {
+    const router = useRouter();
     const { user } = useUser();
     const create = useMutation(api.documents.create);
 
     const onCreate = () => {
-        const promise = create({title: "untitled"});
+        const promise = create({title: "untitled"})
+            .then((documentId) => {
+                router.push(`/documents/${documentId}`);
+            });
 
         toast.promise(promise, {
             loading: "Creating a new note...",
