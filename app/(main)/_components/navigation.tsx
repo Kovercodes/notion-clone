@@ -7,7 +7,7 @@ import { ElementRef, useEffect, useRef, useState } from "react";
 
 import { useMediaQuery } from "usehooks-ts";
 import { UserItem } from "./user-item";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Item } from "./item";
 import { DocumentList } from "./document-list";
@@ -36,8 +36,6 @@ export const Navigation = () => {
     const navbarRef = useRef<ElementRef<"div">>(null);
     const [isResetting, setIsResetting] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(isMobile);
-
-    const documents = useQuery(api.documents.getSidebar);
 
     useEffect(() => {
         if (isMobile) {
@@ -101,20 +99,6 @@ export const Navigation = () => {
         }
     }
 
-    const opacityAnimation = (isIn: boolean = true): void => {
-        if (isIn) {
-            Array.from(sidebarRef.current.children).forEach(child => {
-                child.style.transition = 'opacity 0.1s';
-                child.style.opacity = '0';
-            });
-        } else {
-            Array.from(sidebarRef.current.children).forEach(child => {
-                child.style.transition = '0';
-                child.style.opacity = '100';
-            });
-        }
-    }
-
     const collapse = () => {
         if (sidebarRef.current && navbarRef.current) {
             setIsCollapsed(true);
@@ -123,12 +107,6 @@ export const Navigation = () => {
             sidebarRef.current.style.width = "0";
             navbarRef.current.style.setProperty("width", "100%");
             navbarRef.current.style.setProperty("left", "0");
-
-            // makes all children transparent, only for beautiful animation, so user wont see children resizing along with the container
-            opacityAnimation(true);
-
-            setTimeout(() => setIsResetting(false), 300);
-            setTimeout(() => opacityAnimation(false), 300);
         }
     }
 
@@ -172,7 +150,7 @@ export const Navigation = () => {
                 </div>
                 <div className="mt-4">
                     <DocumentList />
-                    {documents?.length > 0 && (<Item label="Add a page" icon={PlusCircle} onClick={handleCreate}/>)}
+                    <Item label="Add a page" icon={PlusCircle} onClick={handleCreate}/>
                     <Popover>
                         <PopoverTrigger className="w-full mt-4">
                             <Item label="Trash" icon={Trash}/>

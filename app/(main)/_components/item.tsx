@@ -23,7 +23,7 @@ interface ItemProps {
     label: string;
     onClick?: () => void;
     icon: LucideIcon;
-    active: boolean;
+    active?: boolean;
 }
 
 export const Item = ({
