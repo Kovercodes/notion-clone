@@ -11,6 +11,7 @@ import { useParams } from "next/navigation";
 import { remove } from "@/convex/documents";
 import { toast } from "sonner";
 import { useEdgeStore } from "@/lib/edgestore";
+import { Skeleton } from "./ui/skeleton";
 
 interface CoverImageProps {
     url?: string;
@@ -52,7 +53,7 @@ export const Cover = ({
                 />
             )}
             {url && !preview && (
-                <div className="opacity-0 group-hover:opacity-100 absolute bottom-5 right-5 flex items-center gap-x-2">
+                <div className="md:opacity-0 md:group-hover:opacity-100 absolute bottom-5 right-5 flex items-center gap-x-2">
                     <Button
                         onClick={() => coverImage.onReplace(url)}
                         variant="secondary"
@@ -73,5 +74,11 @@ export const Cover = ({
                 </div>
             )}
         </div>
+    )
+}
+
+Cover.Skeleton = function CoverSkeleton() {
+    return (
+        <Skeleton className="w-full h-[20vh]"/>
     )
 }
