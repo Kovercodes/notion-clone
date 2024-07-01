@@ -13,7 +13,7 @@ export const Message = ({position, body}: MessageProps) => {
             className={cn("p-2 px-4 bg-neutral-300  max-w-[80%] rounded-md dark:bg-neutral-600", 
             position === "left" ? "self-start rounded-bl-none" : "self-end rounded-br-none"
         )}>
-            <p className="text-sm text-left">{body}</p>
+            <pre className="text-sm text-left">{body}</pre>
         </div>
     )
 }
