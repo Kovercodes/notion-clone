@@ -44,7 +44,7 @@ export const Navbar = () => {
                         </SignInButton>
                         <SignUpButton mode="modal">
                             <Button size="sm">
-                                Get jotion for free
+                                Get Cascade for free
                             </Button>
                         </SignUpButton>
                     </>

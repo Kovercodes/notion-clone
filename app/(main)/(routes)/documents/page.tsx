@@ -47,7 +47,7 @@ const DocumentsPage = () => {
                 className="hidden dark:block"
             />
             <h2 className="text-large font-medium">
-                {user?.firstName ? `Welcome to ${user?.firstName}'s Jotion!` : `Welcome to ${user?.username}'s Jotion!`}
+                {user?.firstName ? `Welcome to ${user?.firstName}'s Cascade!` : `Welcome to ${user?.username}'s Cascade!`}
             </h2>
             <div className="flex items-center gap-x-4">
                 <Button onClick={onCreate}>

@@ -18,7 +18,7 @@ export const SettingsModal = () => {
           <div className="flex flex-col gap-y-2">
             <Label>Appearance</Label>
             <span className="text-[0.8rem] text-muted-foreground">
-              Customize how Jotion will look
+              Customize how your Cascade will look
             </span>
           </div>
           <ModeToggle />

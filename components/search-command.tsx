@@ -55,7 +55,7 @@ export const SearchCommand = () => {
   return (
     <CommandDialog open={isOpen} onOpenChange={onClose}>
       <CommandInput
-        placeholder={`Search ${user?.fullName ? user.fullName : user?.username}'s Jotion`}
+        placeholder={`Search ${user?.fullName ? user.fullName : user?.username}'s Cascade`}
       />
       <CommandList>
         <CommandEmpty>No results found. Try changing your query.</CommandEmpty>
